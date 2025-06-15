@@ -1,0 +1,114 @@
+/* Refatoração do exercício de combustível utilizando funções */
+
+#include <stdio.h>
+
+int melhorOpcao(float a, float b, float c, float d){
+    float razao_eficiencia = a/b;
+    float razao_preco = c/d;
+    printf("Razão das eficiências = %.2f\n", razao_eficiencia);
+    printf("Razão dos preços = %.2f\n", razao_preco);
+    if(razao_preco <= razao_eficiencia){
+        return 0;
+    }
+    else{
+        return 1;
+    }
+}
+
+int main(){
+    
+    float eficienciaGasolina, eficienciaEtanol;
+
+    // Entrada da eficiência média do carro do usuário
+    printf("Qual a eficiência média do etanol no seu carro em km/l? ");
+    scanf("%f", &eficienciaEtanol);
+    printf("Qual a eficiência média da gasolina no seu carro em km/l? ");
+    scanf("%f", &eficienciaGasolina);
+    
+    float precoGasolina, precoEtanol;
+    
+    // Entrada dos valores dos combustíveis 
+    printf("Qual o preço da gasolina? ");
+    scanf("%f", &precoGasolina);
+    printf("Qual o preço do etanol? ");
+    scanf("%f", &precoEtanol);
+    
+    int temGNV;
+    float eficienciaGNV, precoGNV;
+    
+    // Entrada da eficiência média e do valor do GNV caso o usuário utilize    
+    printf("Seu carro possui GNV? Digite 0 para sim e 1 para não ");
+    scanf("%d", &temGNV);
+    if (temGNV == 0){
+        printf("Qual a eficiência média do GNV no seu carro em km/m³? ");
+        scanf("%f", &eficienciaGNV);
+        printf("Qual o preço do GNV? ");
+        scanf("%f", &precoGNV);
+    }
+    else {
+        eficienciaGNV = 0;
+    }
+    
+    int eficiencia;
+    
+    // Quando a eficiência da gasolina é maior 
+    if (eficienciaGasolina > eficienciaEtanol && eficienciaEtanol> eficienciaGNV){
+        eficiencia=melhorOpcao(eficienciaEtanol, eficienciaGasolina, precoEtanol, precoGasolina);
+        if(eficiencia == 0){
+            printf("Escolha etanol\n");
+        }
+        else if(eficiencia == 1){
+            printf("Escolha gasolina\n");
+        }
+    }
+    else if (eficienciaGasolina > eficienciaGNV && eficienciaGNV > eficienciaEtanol){
+        eficiencia=melhorOpcao(eficienciaGNV, eficienciaGasolina, precoGNV, precoGasolina);
+        if(eficiencia == 0){
+            printf("Escolha GNV\n");
+        }
+        else if(eficiencia == 1){
+            printf("Escolha gasolina\n");
+        }
+    }
+    // Quando a eficiência do Etanol é maior
+    else if (eficienciaEtanol > eficienciaGasolina && eficienciaGasolina > eficienciaGNV){
+        eficiencia=melhorOpcao(eficienciaGasolina, eficienciaEtanol, precoGasolina, precoEtanol);
+        if(eficiencia == 0){
+            printf("Escolha gasolina\n");
+        }
+        else if(eficiencia == 1){
+            printf("Escolha etanol\n");
+        }
+    }
+    else if (eficienciaEtanol > eficienciaGNV && eficienciaGNV > eficienciaGasolina){
+        eficiencia=melhorOpcao(eficienciaGNV, eficienciaEtanol, precoGNV, precoEtanol);
+        if(eficiencia == 0){
+            printf("Escolha GNV\n");
+        }
+        else if(eficiencia == 1){
+            printf("Escolha etanol\n");
+        }
+    }
+    // Quando a eficiência do GNV é maior
+    else if (eficienciaGNV > eficienciaEtanol && eficienciaEtanol > eficienciaGasolina){
+        eficiencia=melhorOpcao(eficienciaEtanol, eficienciaGNV, precoEtanol, precoGNV);
+        if(eficiencia == 0){
+            printf("Escolha etanol\n");
+        }
+        else if(eficiencia == 1){
+            printf("Escolha GNV\n");
+        }
+    }
+    else if (eficienciaGNV > eficienciaGasolina && eficienciaGasolina > eficienciaEtanol){
+        eficiencia=melhorOpcao(eficienciaGasolina, eficienciaGNV, precoGasolina, precoGNV);
+        if(eficiencia == 0){
+            printf("Escolha gasolina\n");
+        }
+        else if(eficiencia == 1){
+            printf("Escolha GNV\n");
+        }
+    }
+
+    return 0;
+    
+}
