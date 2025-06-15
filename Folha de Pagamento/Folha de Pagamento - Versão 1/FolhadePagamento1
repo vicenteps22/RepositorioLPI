@@ -1,0 +1,361 @@
+/******************************************************************************
+
+Exercício da folha de pagamento - versão 1
+
+*******************************************************************************/
+#include <stdio.h>
+#include <ctype.h>
+
+int main()
+{
+
+    char resposta;
+    
+    /* Entrada do salário base e jornada de trabalho mensal do usuário */
+    
+    float salario_base = 0;     // Salário inicialmente documentado na Carteira de Trabalho
+    int horas_trabalhadas = 0;  // Quantidade de horas trabalhadas em um mês
+    
+    printf("Digite o seu salário base: ");
+    scanf(" %f", &salario_base);
+    printf("Digite a sua carga horária mensal: ");
+    scanf(" %i", &horas_trabalhadas);
+    
+    /***** ADICIONAIS *****/
+    
+    /* HORAS EXTRAS E DESCANDO SEMANAL REMUNERADO (DSR) */
+    
+    int hora_extra50 = 0;   // Em dias úteis cada hora extra equivale a 50% sobre o valor da hora normal 
+    int hora_extra100 = 0;  // Em domingos e feriados cada hora extra equivale a 100% sobre o valor da hora normal 
+    float valor_hora_extra50 = 0;   // Valor a receber pelas horas extras em dias úteis 
+    float valor_hora_extra100 = 0;  // Valor a receber pelas horas extras em domingos e feriados 
+    float dsr = 0;  // Descanso Semanal Remunerado 
+    float valor_hora = 0;   // Valor de cada hora de trabalho 
+    int dias_uteis = 24;    // Valores utilizando os dados do mês de abril de 2025
+    int domingos_feriados = 6; 
+    
+    valor_hora = salario_base / horas_trabalhadas;  // Cálculo para achar o valor de cada hora trabalhada
+    
+    do {
+        printf("Foram feitas horas extras?[S/N] ");
+        scanf(" %c", &resposta);
+        resposta = toupper(resposta);
+        if (resposta == 'S') {
+            printf("Digite a quantidade de horas extras em dias úteis realizadas em um mês: ");
+            scanf (" %i", &hora_extra50);
+            valor_hora_extra50 = valor_hora * 1.50 * hora_extra50;
+            printf("Digite a quantidade de horas extras em domingos e feriados realizadas em um mês: ");
+            scanf (" %i", &hora_extra100);
+            valor_hora_extra100 = valor_hora * 2.00 * hora_extra100;
+        }
+        else if (resposta == 'N') {
+            valor_hora_extra100 = 0;
+            valor_hora_extra50 = 0;
+        }
+        else {
+            printf("Digito inválido!\nTente novamente\n");
+        }
+    } while (resposta != 'S' && resposta != 'N');
+    
+    /* Cálculo do Descanso Semanal Remunerado */
+    if (hora_extra50 > 0 || hora_extra100 > 0) {
+        dsr = ((valor_hora_extra50 + valor_hora_extra100) / dias_uteis) * domingos_feriados;
+    }
+    else {
+        dsr = 0;
+    }
+    
+    /* ADICIONAL DE PERICULOSIDADE 
+    O adicional de periculosidade pode ser concedido a trabalhadores expostos a riscos a saude ou integridade física */
+    
+    float periculosidade = 0; /* Valor da periculosidade que será somada ao salário base */
+    
+    do {
+        printf("Seu trabalho tem adicional de periculosidade?[S/N] "); 
+        scanf(" %c", &resposta);
+        resposta = toupper(resposta);
+        if (resposta == 'S') {
+            /* O adicional de periculosidade equivale a 30% do salário base */
+            periculosidade = (salario_base + valor_hora_extra50 + valor_hora_extra100 + dsr) * 0.30;
+        }
+        else if (resposta == 'N') {
+            periculosidade = 0;
+        }
+        else {
+            printf("Digito inválido!\nTente novamente\n");
+        }
+    } while (resposta != 'S' && resposta != 'N');
+    
+    /* ADICIONAL DE INSALUBRIDDE
+    O adicional de insalubridade é uma compensação ao trabalhador exposto a agentes nocivos no ambiente de trabalho */
+    
+    float insalubridade = 0;    // Valor do adicional de insalubridade que será adicionado ao salário base 
+    float grau_insalubridade = 0;   // A inslabruidade é classificada em 3 graus: mínimo, médio e máximo 
+    
+    do {
+        printf("Seu trabalho tem adicional de insalubridade?[S/N] ");
+        scanf(" %c", &resposta);
+        resposta = toupper(resposta);
+        if (resposta == 'S') {
+            do {
+                printf("Qual o grau de insalubridade: 10%%, 20%% ou 40%%? "); 
+                scanf(" %f", &grau_insalubridade);
+                if (grau_insalubridade == 10 || grau_insalubridade == 20 || grau_insalubridade == 40) {
+                    /* No cálculo para o adicional de insalubridade multiplica o salário mínimo vigente
+                    pela porcentagem de acordo com o grau de insalubridade */
+                    insalubridade = (grau_insalubridade/100) * 1518;
+                }    
+                else {
+                    printf("Digito inválido!\nTente novamente\n");
+                }
+            } while (grau_insalubridade != 10 && grau_insalubridade != 20 && grau_insalubridade != 40);
+        }
+        else if (resposta == 'N'){
+            insalubridade = 0;
+        }
+        else {
+            printf("Digito inválido!\nTente novamente\n");
+        }
+    } while (resposta != 'S' && resposta != 'N');
+    
+    /***** DESCONTOS *****/
+    
+    /* VALE REFEIÇÃO (VR)
+    O Vale Refeição é opcional da empresa e pode ser descontado apenas 20% do valor do vale no salário */
+    
+    float vale_refeicao = 0;    // Valor do vale refeição 
+    float porcentagem_vr = 0;   // Porcentagem do valor do VR que será descontada no salário base
+    float desconto_vr = 0;  // Valor que será descontado no salário base
+    
+    do {
+        printf("Você recebe Vale Refeição?[S/N] ");
+        scanf(" %c", &resposta);
+        resposta = toupper(resposta); 
+        if (resposta == 'S') {
+            printf("Digite o valor do seu Vale Refeição: ");
+            scanf("%f", &vale_refeicao);
+            printf("Digite a porcentagem do valor do Vale Refeição que será descontada no salário: ");
+            scanf("%f", &porcentagem_vr);
+                // Cálculo para achar o valor a ser descontado no salário
+            if (porcentagem_vr <= 20 ) {
+                desconto_vr = (porcentagem_vr / 100) * vale_refeicao;
+            }
+            else {
+                printf("O desconto não pode passar de 20%% do Vale Refeição\n");
+                desconto_vr = 0.2 * vale_refeicao;
+                porcentagem_vr = 20;
+            }
+        }
+        else if (resposta == 'N') {
+            vale_refeicao = 0;
+            porcentagem_vr = 0;
+            desconto_vr = 0;
+        }
+        else {
+            printf("Digito inválido!\nTente novamente\n");
+        }
+    } while (resposta != 'S' && resposta != 'N');
+    
+    /* CONVÊNIO DE SAÚDE
+    O Convênio de Saude ou Plano de Saúde é um beneficio dado pela empresa
+    Só pode ser descontado a parte do plano de saúde do funcionário se houver um acordo prévio */
+    
+    float porcentagem_convenio = 0; // Porcentagem do valor do benefício que será descontada do salário do trabalhador 
+    float desconto_convenio = 0;    // Valor que será descontado do salário
+    
+    do {
+        printf("Você possui Convênio de Saúde?[S/N] ");
+        scanf(" %c", &resposta);
+        resposta = toupper(resposta);
+        if (resposta == 'S') {
+            printf("Digite a porcentagem do seu salário que será descontada para o Convênio de Saúde: ");
+            scanf(" %f", &porcentagem_convenio);
+            desconto_convenio = salario_base * (porcentagem_convenio / 100); 
+        }
+        else if (resposta == 'N') {
+            desconto_convenio = 0;
+        }    
+        else {
+            printf("Digito inválido!\nTente novamente\n");
+        }
+    } while (resposta != 'S' && resposta != 'N');
+       
+    /* CONTRIBUIÇÃO SINDICAL
+    A contribuição sindical é um valor pago, de forma opcional, por trabalhadores aos sindicatos de suas respectivas categorias */ 
+    
+    float contribuicao_sindical = 0;
+    
+    do {
+        printf("Você deseja pagar a Contribuição Sindical?[S/N] ");
+        scanf(" %c", &resposta);
+        resposta = toupper(resposta);
+        if (resposta == 'S') {
+            contribuicao_sindical = salario_base / 30;  // O valor da contribuição corresponde a um dia de trabalho 
+        }
+        else if (resposta == 'N') {
+            contribuicao_sindical = 0;
+        }
+        else {
+            printf("Digito inválido!\nTente novamente");
+        }
+    } while (resposta != 'S' && resposta != 'N');
+     
+    /* VALE TRANSPORTE
+    O Vale Transporte é um benefício para cobrir as despesas deslocamento do trabalhador */
+    
+    float vale_transporte = 0;
+    
+    do {
+        printf("Você utiliza Vale Transporte?[S/N] ");
+        scanf(" %c", &resposta);
+        resposta = toupper(resposta);
+        if (resposta == 'S') {
+            vale_transporte = 0.06 * salario_base;  // Só pode ser descontado 6% do salário para custear o Vale Transporte
+        }
+        else if (resposta == 'N') {
+            vale_transporte = 0;
+        }
+        else {
+            printf("Digito inválido!\nTente novamente\n");
+        }
+    } while (resposta != 'S' && resposta != 'N');    
+    
+    /* Cálculo dos proventos que servirão de base para os cálculos de descontos */
+    
+    float proventos = 0;    // Todos os rendimentos ou ganhos que uma pessoa recebe 
+    float adicionais = 0;   // Valores extras pagos além do salário base 
+    
+    adicionais = valor_hora_extra100 + valor_hora_extra50 + dsr + insalubridade + periculosidade;
+    proventos = salario_base + adicionais;
+    
+    /* INSTITUTO NACIONAL DO SEGURO SOCIAL
+    A contribuição para o INSS é feita através de uma alíquota sobre os proventos
+    A alíquota varia de acordo com a faixa salarial
+    Depois de calculado o valor do INSS, é descontado dele uma dedução que varia de acordo com a faixa salarial */
+    
+    float desconto_inss = 0;    //Valor que será descontado dos proventos 
+    float aliquota_inss = 0;    //Percentual usado para calcular o valor final de um imposto 
+    
+    if (proventos <= 1518){
+        aliquota_inss = 7.5;
+        desconto_inss = (proventos) * 0.075;
+    }
+    else if (proventos >= 1518.01 && proventos <= 2793.88){
+        aliquota_inss = 9;
+        desconto_inss = ((proventos) * 0.09) - 22.77; 
+    }
+    else if (proventos >= 2793.89 && proventos <= 4190.83){
+        aliquota_inss = 12;
+        desconto_inss = ((proventos) * 0.12) - 106.59;
+    }
+    else if (proventos >= 4190.84 && proventos <= 8157.41){
+        aliquota_inss = 14;
+        desconto_inss = ((proventos) * 0.14) - 190.40;
+    }
+    else {
+        /* R$ 8157.41 é o valor máximo que as alíquotas incidem
+        Então, qualquer valor a partir desse terá o mesmo desconto de INSS */
+        desconto_inss = (8157.41 * 0.14) - 190.40;
+    }
+    
+    /* IMPOSTO DE RENDA RETIDO NA FONTE 
+    O desconto do Imposto de Renda (IRRF) é calculado aplicando uma alíquota sobre os proventos menos o desconto do INSS */
+    
+    float desconto_irrf = 0;
+    float aliquota_irrf = 0; 
+    
+    if (proventos - desconto_inss <= 2259.20){ // Abaixo desse valor o trabalhador está isento ao Imposto de Renda
+        aliquota_irrf = 0; 
+        desconto_irrf = 0;
+    }
+    else if (proventos - desconto_inss >= 2259.21 && proventos - desconto_inss <= 2826.65 ){
+        aliquota_irrf = 7.5;
+        desconto_irrf = ((proventos - desconto_inss) * 0.075) - 169.44;
+    }
+    else if (proventos - desconto_inss >= 2826.66 && proventos - desconto_inss <= 3751.05 ){
+        aliquota_irrf = 15;
+        desconto_irrf = ((proventos - desconto_inss) * 0.15) - 381.44;
+    }
+    else if ( proventos - desconto_inss >= 3751.06 && proventos - desconto_inss <= 4664.68 ){
+        aliquota_irrf = 22.5;
+        desconto_irrf = ((proventos - desconto_inss) * 0.225) - 662.77;
+    }
+    else {
+        aliquota_irrf = 27.5;
+        desconto_irrf = ((proventos - desconto_inss) * 0.275) - 896;
+    }
+    
+    float descontos = 0; /* Valores a serem descontados dos proventos */
+    
+    descontos = desconto_irrf + desconto_inss + vale_transporte + desconto_vr + desconto_convenio + contribuicao_sindical; 
+
+    /* SALÁRIO FAMÍLIA 
+    Salário Família um benefício pago a trabalhadores com filhos ou dependentes até 14 anos, ou inválidos de qualquer idade */
+    
+    float salario_familia = 0; 
+    int quantidade_dependentes = 0; 
+     
+  
+    if (proventos <= 1906.04){ /* Salário familia só pode ser usado se a soma do salário base com os adicionais for menor que 1906.05 */
+        do {
+            printf("Você possui filhos ou dependentes de até 14 anos ou inválidos de qualquer idade?[S/N] ");
+            scanf(" %c", &resposta);
+            resposta = toupper(resposta);
+                if (resposta == 'S') {
+                    printf("Digite a quantidade de filhos ou dependentes: ");
+                    scanf(" %i", &quantidade_dependentes);
+                    salario_familia = quantidade_dependentes * 65; /* A cota é R$ 65 por dependente */
+                }
+                else if (resposta == 'N') {
+                    salario_familia = 0;
+                }
+                else {
+                    printf("Digito inválido!\nTente novamente\n");
+                }   
+        } while (resposta != 'S' && resposta != 'N');
+    }    
+    else {
+        salario_familia = 0;
+    }
+    
+    /* FUNDO DE GARANTIA DO TEMPO DE SERIVÇO
+    O FGTS é um fundo criado com o objetivo de proteger o trabalhador que for demitido sem justa causa 
+    Ele é pago pelo empregador e não é descontado do salário e nem adicionado */
+    
+    float fgts = 0;
+    
+    fgts = 0.08 * (proventos); /* O cálculo é feito descontando 8% do salário base + adicionais */
+   
+    /* SALÁRIO LÍQUIDO
+    O salário líquido é o valor final que o trabalhador recebe após todos os descontos e impostos aplicados sobre o salário base */
+    
+    float salario_liquido = 0;
+    
+    salario_liquido = proventos + salario_familia - descontos;
+    
+    
+    
+    printf("\nDescrição ----------- Referência ---- Proventos ----- Descontos\n");
+    printf("\nSalário Base           %i h           R$ %.2f\n", horas_trabalhadas, salario_base);
+    printf("Horas Extras 50%%        %i h           R$ %.2f\n", hora_extra50, valor_hora_extra50);
+    printf("Horas Extras 100%%       %i h           R$ %.2f\n", hora_extra100, valor_hora_extra100);
+    printf("DSR                                     R$ %.2f\n", dsr);
+    printf("Periculosidade           30%%           R$ %.2f\n", periculosidade);
+    printf("Insalubridade            %.2f%%         R$ %.2f\n", grau_insalubridade, insalubridade);
+    printf("Salário Família          %i             R$ %.2f\n", quantidade_dependentes, salario_familia);
+    printf("INSS                     %.2f%%                           R$ %.2f\n", aliquota_inss, desconto_inss);
+    printf("IRRF                     %.2f%%                           R$ %.2f\n", aliquota_irrf, desconto_irrf);
+    printf("Vale Transporte          6%%                              R$ %.2f\n", vale_transporte);
+    printf("Vale Refeição            %.2f%%                           R$ %.2f\n", porcentagem_vr, desconto_vr);
+    printf("Convênio de Saúde        %.2f%%                           R$ %.2f\n", porcentagem_convenio, desconto_convenio);
+    printf("Contribuição Sindical                                     R$ %.2f\n", contribuicao_sindical);
+    printf("\n-------------------------------------- Total----------- Total----\n");
+    printf("\n                                       %.2f             %.2f\n", proventos + salario_familia, descontos);
+    printf("\n---------------------------------------------------------------\n");
+    printf("\n------------------------------------ Líquido a Receber -> %.2f\n", salario_liquido);
+    printf("\nSalário Base --- Base Cálc. FGTS --- FGTS do Mês  --- Base Cálc. INSS --- Base Cálc. IRRF\n");
+    printf("\n%.2f              %.2f                %.2f             %.2f                %.2f\n", salario_base, proventos, fgts, proventos, proventos - desconto_inss);    
+
+return 0;
+
+}
