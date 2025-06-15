@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main (){
+
+    // Declaração das variáveis para os números escolhidos pelo usuário
+    int esc1, esc2, esc3, esc4, esc5, esc6;
+
+    srand((unsigned)time(NULL));
+
+    // Entrada dos números para serem sorteados pelo usuário
+    do {
+        printf("Escolha um primeiro número: ");
+        scanf("%d", &esc1);
+    } while ( esc1 < 1 || esc1 > 60);
+    do {
+        printf("Escolha um segundo número: ");
+        scanf("%d", &esc2);
+    } while ( esc2 < 1 || esc2 > 60 || esc2 == esc1 );
+    do {
+        printf("Escolha um terceiro número: ");
+        scanf("%d", &esc3);
+    } while ( esc3 < 1 || esc3 > 60 || esc3 == esc2 || esc3 == esc1 );
+    do {
+        printf("Escolha um quarto número: ");
+        scanf("%d", &esc4);
+    } while ( esc4 < 1 || esc4 > 60 || esc4 == esc3 || esc4 == esc2 || esc4 == esc1 );
+    do {
+        printf("Escolha um quinto número: ");
+        scanf("%d", &esc5);
+    } while ( esc5 < 1 || esc5 > 60 || esc5 == esc4 || esc5 == esc3 || esc5 == esc2 || esc5 == esc1 );
+    do {
+        printf("Escolha um sexto número: ");
+        scanf("%d", &esc6);
+    } while ( esc6 < 1 || esc6 > 60 || esc6 == esc5 || esc6 == esc4 || esc6 == esc3 || esc6 == esc2 || esc6 == esc1 );
+
+
+    // Declaração das variáveis dos numeros que serão sorteados
+    int sort1, sort2, sort3, sort4, sort5, sort6;
+    int cont;
+
+    do {
+        sort1 = (rand() % 60) + 1;
+        sort2 = (rand() % 60) + 1;
+        sort3 = (rand() % 60) + 1;
+        sort4 = (rand() % 60) + 1;
+        sort5 = (rand() % 60) + 1;
+        sort6 = (rand() % 60) + 1;
+        cont++;
+        printf("%d, %d, %d, %d, %d, %d\n", sort1, sort2, sort3, sort4, sort5, sort6);
+    } while ((sort1 != esc1) || (sort2 != esc2) || (sort3 != esc3) || (sort4 != esc4) || (sort5 != esc5) || (sort6 != esc6));
+
+    printf("Números Sorteados!\n");
+    printf("Número de sorteios realizados: %d\n", cont);
+
+    return 0;
+    
+}
