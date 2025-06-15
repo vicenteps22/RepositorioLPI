@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Verifica se as coordenadas sorteadas x e y estão dentro da área do circulo
+int verificacao(float x, float y, float r) {
+    float distancia = x * x + y * y;
+    if (distancia <= r * r) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+int main() {
+    
+    srand(time(NULL));
+
+    int limitePontos = 10000000;    // Quantidade de coordenadas que serão sorteadas
+    int dentroArea = 0;
+    float raio = 1.0;
+    
+    // Sorteio das coordenadas x e y
+    for (int i = 0; i < limitePontos; i++) {
+        float x = (float)rand() / RAND_MAX;
+        float y = (float)rand() / RAND_MAX;
+        
+        // Soma a quantidade de coordenadas que estão dentro da área do circulo
+        dentroArea += verificacao(x, y, raio);
+    }
+    
+    float pi = 4.0 * dentroArea / limitePontos;
+
+    printf("Valor aproximado de pi: %f\n", pi);
+
+    return 0;
+}
