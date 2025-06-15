@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+int main()
+{
+    
+    // Apresente uma contagem sequencial entre 0 e 10.000;
+    
+    for ( int i = 0; i <= 10000; i++ )
+    printf("Valor de i: %i\n", i);
+    
+    // Apresente uma contagem sequencial entre -10.000 e +10.000;
+    
+    for ( int i = -10000; i <= 10000; i++ )
+    printf("Valor de i: %i\n", i);
+    
+    // Apresente uma contagem sequencial entre 0 e 10.000 dos números pares;
+    
+    for ( int i = 0; i <= 10000; i += 2)
+    printf("Valor de i: %i\n", i);
+    
+    // Apresente uma contagem sequencial entre 0 e 10.000 dos números ímpares;
+    
+    for ( int i = 1; i <= 10000; i += 2 )
+    printf("Valor de i: %i\n", i);
+    
+    // Apresente uma contagem intervalada de 3 entre -100.000 e +100.000;
+    
+    for ( int i = -100000; i <= 100000; i += 3 )
+    printf("Valor de i: %i\n", i);
+    
+    // Implemente um terceiro loop aninhado;
+    
+    int count_1 = 0, count_2 = 0, count_3 = 0;
+    
+    for ( int i = 0; i < 10; i++ ){
+        count_1++;
+        for ( int j = 0; j < 10; j++){
+             count_2++;
+             for ( int k = 0; k < 10; k++){
+                 printf("Valor de i: %i Valor de j: %i Valor de k: %i\n", i, j, k);
+                 count_3++;
+             }
+        }
+    }
+      
+    printf("Laço 1: %i iterações\n", count_1);
+    printf("Laço 2: %i iterações\n", count_2);
+    printf("Laço 3: %i iterações\n", count_3);
+    printf("Número total de iterações: %i\n", count_3);
+
+    return 0;
+}
