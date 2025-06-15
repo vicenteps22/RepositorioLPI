@@ -1,0 +1,56 @@
+/* Qual combustível usar? - Parte 2 */
+
+#include <stdio.h>
+
+int main(){
+    
+    float eficienciaEtanol, precoEtanol, custoEtanol;
+
+    // Entrada da eficiência média e preço do etanol 
+    printf("Qual a eficiência média do etanol no seu carro em km/l? ");
+    scanf("%f", &eficienciaEtanol);
+    printf("Qual o preço do etanol? ");
+    scanf("%f", &precoEtanol);
+    custoEtanol = precoEtanol/eficienciaEtanol;
+    
+    float eficienciaGasolina, precoGasolina, custoGasolina;
+    
+    // Entrada da eficiência média e preço da Gasolina
+    printf("Qual a eficiência média da gasolina no seu carro em km/l? ");
+    scanf("%f", &eficienciaGasolina);
+    printf("Qual o preço da gasolina? ");
+    scanf("%f", &precoGasolina);
+    custoGasolina = precoGasolina/eficienciaGasolina;
+    
+    int opcaoGNV;
+    float eficienciaGNV, precoGNV, custoGNV = 10000;
+    
+    // Entrada da eficiência média e do valor do GNV caso o usuário utilize 
+    printf("Seu carro possui GNV? Digite 0 para sim e 1 para não ");
+    scanf("%i", &opcaoGNV);
+    if (opcaoGNV == 0){
+        printf("Qual a eficiência média do GNV no seu carro em km/m³? ");
+        scanf("%f", &eficienciaGNV);
+        printf("Qual o preço do GNV? ");
+        scanf("%f", &precoGNV);
+        custoGNV = precoGNV/eficienciaGNV;
+    }
+    
+    // Comparação dos valores dos combustíveis
+    printf("Custo etanol: R$%.2f por km\n", custoEtanol);
+    printf("Custo gasolina: R$%.2f por km\n", custoGasolina);
+    if(opcaoGNV == 0){
+        printf("Custo do GNV por km: R$%.2f\n", custoGNV);
+    }
+    printf("Escolha ");
+    if(custoEtanol < custoGasolina && custoEtanol < custoGNV){
+        printf("etanol\n");
+    } else if(custoGasolina < custoEtanol && custoGasolina < custoGNV){
+        printf("gasolina\n");
+    } else if (custoGNV < custoGasolina && custoGNV < custoEtanol){
+        printf("GNV\n");
+    }
+    
+    return 0;
+    
+}
