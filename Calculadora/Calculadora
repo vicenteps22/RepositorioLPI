@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+// Checa os operadores e retorna o resultado
+float checarOperador(char operador, float a, float b){
+    switch (operador){
+        case'+':
+            return a + b;
+            break;
+        case'-':
+            return a - b;
+            break;
+        case'*':
+            return a * b;
+            break;
+        case'/':
+            return a / b;
+            break;
+        default:
+            printf("Operador inválido");
+    }
+}
+
+int main (){
+
+    // Variáveis dos números e operadores que serão inseridos
+    float num1, num2, num3, num4, num5, num6, resultado;
+    char oper1, oper2, oper3, oper4, oper5;
+    
+    printf("Digite sua operação: ");
+    // Cálculo com 1 operador
+    scanf("%f", &num1);
+    scanf(" %c", &oper1);
+    scanf("%f", &num2);
+    resultado=checarOperador(oper1, num1, num2);
+    if (getchar() == '\n'){
+        printf("Resultado: %.2f\n", resultado);
+        return 0;
+    }
+    // Cálculo com 2 operadores
+    scanf(" %c", &oper2);
+    scanf("%f", &num3);
+    resultado=checarOperador(oper2, resultado, num3);
+    if (getchar() == '\n'){
+        printf("Resultado: %.2f\n", resultado);
+        return 0;
+    }
+    // Cálculo com 3 operadores
+    scanf(" %c", &oper3);
+    scanf("%f", &num4);
+    resultado=checarOperador(oper3, resultado, num4);
+    if (getchar() == '\n'){
+        printf("Resultado: %.2f\n", resultado);
+        return 0;
+    }
+    // Cálculo com 4 operadores
+    scanf(" %c", &oper4);
+    scanf("%f", &num5);
+    resultado=checarOperador(oper4, resultado, num5);
+    if (getchar() == '\n'){
+        printf("Resultado: %.2f\n", resultado);
+        return 0;
+    }
+    // Cálculo com 5 operadores
+    scanf(" %c", &oper5);
+    scanf("%f", &num6);
+    resultado=checarOperador(oper5, resultado, num6);
+    if (getchar() == '\n'){
+        printf("Resultado: %.2f\n", resultado);
+        return 0;
+    }
+
+}
