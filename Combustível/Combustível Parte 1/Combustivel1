@@ -1,0 +1,30 @@
+/* Qual combustível usar? - Parte 1 */
+#include <stdio.h>
+
+int main (){
+
+    float precoEtanol, precoGasolina;
+
+    // Entrada dos valores correspondentes aos preços do etanol e gasolina
+    printf("Qual o preço do etanol atualmente? ");
+    scanf("%f", &precoEtanol);
+    printf("Qual o preço da gasolina atualmente? ");
+    scanf("%f", &precoGasolina);
+
+    float porcentagemEtanol;
+
+    // Cálculo da porcentagem do preço do etanol em comparação com o preço da gasolina
+    porcentagemEtanol = precoEtanol / precoGasolina;
+
+    printf("O preço do etanol equivale %.2f%% do preço da gasolina\n", porcentagemEtanol*100);
+
+    if (porcentagemEtanol <= 0.7){
+        printf("Coloque etanol\n");
+    }
+    else {
+        printf("Coloque gasolina\n");
+    }
+
+    return 0;
+
+}
