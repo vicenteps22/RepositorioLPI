@@ -21,7 +21,7 @@ O objetivo deste repositório é servir como um portfólio de aprendizado e refe
 ## 🛠️ Tecnologias Utilizadas
 
 - 🧠 **Linguagem:** C
-- 🖥️ **IDE:** VSCode (opcional)
+- 🖥️ **IDE:** VSCode
 - 🔧 **Compilador:** GCC
 
 ---
