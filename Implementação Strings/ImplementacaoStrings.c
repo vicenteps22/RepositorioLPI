@@ -67,7 +67,7 @@ int main() {
 
     // A função toupper converte uma letra minúscula para maiúscula
     char h = 'a';
-    if(islower(g)) {
+    if(islower(h)) {
         printf("Convertendo '%c para maiúscula: '%c'.\n", h, toupper(h));
     } else {
         printf("O caractere '%c' não é uma letra maiúscula.\n", h);
