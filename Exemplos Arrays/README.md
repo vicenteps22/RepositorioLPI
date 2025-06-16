@@ -1,6 +1,6 @@
 # Exemplos Arrays
 
-Esté um programa usado para demonstrar conceitos básicos de manipulação de arrays em C.
+Este é um programa usado para demonstrar conceitos básicos de manipulação de arrays em C.
 
 ---
 
