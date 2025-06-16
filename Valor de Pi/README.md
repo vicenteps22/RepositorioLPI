@@ -1,4 +1,4 @@
-# Aproximação do valor de Pi usando o Método de Monte Carlo 🖩
+# Aproximação do valor de Pi usando o Método de Monte Carlo 🧮
 
 Este programa em C estima o valor de pi (π) utilizando o método de Monte Carlo, sorteando pontos aleatórios dentro de um quadrado e verificando quantos estão dentro de um círculo.
 
