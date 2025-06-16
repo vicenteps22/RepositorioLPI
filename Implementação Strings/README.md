@@ -1,4 +1,4 @@
-# Implementação Strings
+# Implementação Strings 🔠
 
 Este programa em C demonstra o uso de várias funções das bibliotecas padrão `<ctype.h>` e `<string.h>`, que auxiliam no tratamento e manipulação de caracteres e strings.
 
