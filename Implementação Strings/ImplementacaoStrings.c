@@ -10,7 +10,6 @@ int main() {
     char frase[N];
 
     // A função isdigit verifica se o caractere é um dígito (0-9)
-    
     char a = '1';
     if(isdigit(a)) {
         printf("O caractere '%c' é um dígito.\n", a);
@@ -96,7 +95,6 @@ int main() {
     char str6[] = "Mundo!";
     strcat(str5, str6);
     printf("Concatenando strings: %s\n", str5);
-
     
     char str7[] = "ola ,mundo!";
     int result = strcmp(str5, str7);
