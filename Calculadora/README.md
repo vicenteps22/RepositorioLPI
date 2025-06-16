@@ -1,4 +1,4 @@
-# Aproximação do valor de Pi usando o Método de Monte Carlo
+# Calculadora Básica
 
 Esta calculadora executa operações matemáticas básicas de forma sequencial, da esquerda para a direita, sem considerar a ordem de precedência dos operadores.
 
