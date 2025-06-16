@@ -1,6 +1,6 @@
 # Tempo de execução numa matriz linha -> coluna e coluna -> linha
 
-Esse seu código está medindo o tempo de execução para preencher e somar os valores de uma matriz 2D, comparando o acesso linha -> coluna com o acesso coluna -> linha.
+Esse código mede o tempo de execução para preencher e somar os valores de uma matriz 2D, comparando o acesso linha -> coluna com o acesso coluna -> linha.
 
 ---
 
