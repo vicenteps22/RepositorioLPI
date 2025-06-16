@@ -45,7 +45,7 @@ Instale o [MinGW-w64](https://www.mingw-w64.org/) e configure as variáveis de a
 ### ✔️ Compilar e Executar
 
 1️⃣ Salve o código em um arquivo com a extensão .c.  
-Exemplo: ```ExercicioAula03.c```
+Exemplo: ```arquivo.c```
 
 2️⃣ Abra o terminal e navegue até o diretório onde está o arquivo:  
 ```bash
@@ -55,13 +55,13 @@ cd caminho/para/sua/pasta
 
 3️⃣ Compile o programa:  
 ```bash
-gcc ExercicioAula03.c -o Exercicio_Aula03
+gcc arquivo.c -o Programa
 ```
 
 
 4️⃣ Execute o programa:  
 ```bash
-./Exercicio_Aula03
+./Programa
 ```
 
 
