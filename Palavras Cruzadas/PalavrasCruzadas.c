@@ -13,7 +13,7 @@ void mostrarPainel(char painel[4][4]) {
     }
 }
 
-int checarResultado(char resposta[4], char linha, char coluna, char direcao) {
+int checarTentativa(char tentativa[4], char linha, char coluna, char direcao) {
     
     char resposta1[] = "GAS";
     char resposta2[] = "GIZ";
@@ -21,15 +21,15 @@ int checarResultado(char resposta[4], char linha, char coluna, char direcao) {
 
     direcao = toupper(direcao);
 
-    for (int i = 0; resposta[i] != '\0'; i++) {
-        resposta[i] = toupper(resposta[i]);
+    for (int i = 0; tentativa[i] != '\0'; i++) {
+        tentativa[i] = toupper(tentativa[i]);
     }
 
-    if ((strcmp(resposta, resposta1) == 0) && linha == '1' && coluna == '1' && direcao == 'H') {
+    if ((strcmp(tentativa, resposta1) == 0) && linha == '1' && coluna == '1' && direcao == 'H') {
         return 0;
-    } else if ((strcmp(resposta, resposta2)) == 0 && linha == '1' && coluna == '1' && direcao == 'V') {
+    } else if ((strcmp(tentativa, resposta2)) == 0 && linha == '1' && coluna == '1' && direcao == 'V') {
         return 0;
-    } else if ((strcmp(resposta, resposta3)) == 0 && linha == '3' && coluna == '1' && direcao == 'H') {
+    } else if ((strcmp(tentativa, resposta3)) == 0 && linha == '3' && coluna == '1' && direcao == 'H') {
         return 0;
     } else {
         return 1;
@@ -55,7 +55,7 @@ int main(){
     };
 
     // Respostas do usuário
-    char resposta[4];
+    char tentativa[4];
 
     printf ("Caça Palavras\n");
 
@@ -74,16 +74,16 @@ int main(){
 
     // Loop para receber as respostas do usuário
     // O jogo termina quando o usuário acertar todas as palavras
-    // O usuário deve informar a linha, coluna, direção (H ou V) e a resposta
+    // O usuário deve informar a linha, coluna, direção (H ou V) e a tentativa de resposta
     do {
-        printf("\nDigite a linha, coluna, direção (H/V) e a resposta:\n");
+        printf("\nDigite a linha, coluna, direção (H/V) e a tentativa:\n");
         scanf(" %c %c %c", &linha, &coluna, &direcao);
         getchar();
-        fgets(resposta, sizeof(resposta), stdin);
-        resposta[strcspn(resposta, "\n")] = '\0';
-        // Verifica se a resposta está correta
-        checagem = checarResultado(resposta, linha, coluna, direcao);
-        // Se a resposta estiver correta, incrementa o contador de acertos
+        fgets(tentativa, sizeof(tentativa), stdin);
+        tentativa[strcspn(tentativa, "\n")] = '\0';
+        // Verifica se a tentativa está correta
+        checagem = checarTentativa(tentativa, linha, coluna, direcao);
+        // Se a tentativa estiver correta, incrementa o contador de acertos
         if (checagem == 0){
             ++acertos;
         }
