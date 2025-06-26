@@ -13,7 +13,7 @@ void mostrarPainel(char painel[4][4]) {
     }
 }
 
-int checkResult(char resposta[4], char linha, char coluna, char direcao) {
+int checarResultado(char resposta[4], char linha, char coluna, char direcao) {
     
     char resposta1[] = "GAS";
     char resposta2[] = "GIZ";
@@ -82,7 +82,7 @@ int main(){
         fgets(resposta, sizeof(resposta), stdin);
         resposta[strcspn(resposta, "\n")] = '\0';
         // Verifica se a resposta está correta
-        checagem = checkResult(resposta, linha, coluna, direcao);
+        checagem = checarResultado(resposta, linha, coluna, direcao);
         // Se a resposta estiver correta, incrementa o contador de acertos
         if (checagem == 0){
             ++acertos;
